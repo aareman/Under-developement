@@ -1,0 +1,11 @@
+x   x^2     app     actual
+1   1       
+
+
+(x,f(x)), (x1, f(x1))
+
+m = f(x1) - f(x) / x1 - x
+-f(x) = m(x1-x) - f(x1)
+f(x) = m(x-x1) + f(x1)
+
+f(x) = m(x-h) + f(h)

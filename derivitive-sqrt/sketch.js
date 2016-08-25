@@ -17,10 +17,10 @@ function setup(){
     //sliders
     rslider = createSlider(0.01,6,5.5,.0001);
     rslider.position(420,30);
-    g = new Graph(400,400,0,10,0,81,10,10);
+    g = new Graph(400,400,0,10,0,4,10,10);
     g.title = 'Approximating the \nslope of a Point';
     g.xlabel = 'x';
-    g.ylabel = 'x^2';
+    g.ylabel = 'sqrt(x)';
     g.showLegend = true;
 }
 function draw(){
@@ -29,9 +29,9 @@ function draw(){
     g.addPlot(get_xx(10));
     //g.addPlot(get_xa(20,rslider.value()));
     //g.addPlot(get_xp(20));
-    g.addPlot(get_tangent(3));
-    g.addPlot(get_secant(3,3+rslider.value()));
-    g.addPlot(get_secPoints(3, 3+rslider.value()));
+    g.addPlot(get_tangent(2));
+    g.addPlot(get_secant(2,2+rslider.value()));
+    g.addPlot(get_secPoints(2, 2+rslider.value()));
     g.plots[3].show = false;
     
     g.drawBg();
@@ -43,11 +43,11 @@ function draw(){
     text("h: " + rslider.value(),420,15);
 
     fill(255,0,0);
-    text('f(3): ' + xsq(3),420,100);
+    text('f(2): ' + xsq(2),420,100);
     fill(0,0,255);
-    text("F(3) ~= [f(3+h)-f(3)]/h: " + xsqPrime_approx(3,rslider.value()),420,130);
+    text("F(2) ~= [f(2+h)-f(2)]/h: " + xsqPrime_approx(2,rslider.value()),420,130);
     fill(0);
-    text("F(3): " + xsqPrime_actual(3),420,160);
+    text("F(2): " + xsqPrime_actual(2),420,160);
     
 //    text('Resolution: ', 20, 120);
 }
@@ -56,7 +56,7 @@ function draw(){
 //        Other functions
 //******************************
 function xsq(x){
-    return x*x;
+    return Math.sqrt(x);
 }
 function xsqPrime_approx(a, h){
     //info: f'(x) = lim(h->0) of (f(x+h)-f(x))/h
@@ -64,7 +64,7 @@ function xsqPrime_approx(a, h){
     else  return (xsq(a+h)-xsq(a))/h;
 }
 function xsqPrime_actual(x){
-    return 2*x;
+    return .5*1/Math.sqrt(x);
 }
 function get_xx(res){
     pa = [];
@@ -72,7 +72,7 @@ function get_xx(res){
         p = new Point(i,xsq(i));
         pa.push(p);
     }
-    pl = new Plot(pa,255,0,0,2,'x^2');
+    pl = new Plot(pa,255,0,0,2,'sqrt(x)');
     pl.pointSize = 0;
     return pl;
 }
